@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "admin",
+    "username": "root",
     "password": "admin@123",
     "database": "mydatabase",
     "host": "127.0.0.1",
