@@ -1,14 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const { errHandler, paginate } = require("../../helpers");
+const { errHandler } = require("../../helpers");
 const User = require("./../../models/User");
+const stream = require("stream");
 
 // Get all users
 router.get("/", async (req, res) => {
-  const users = await User.findAll({
-    attributes: ["id", "name", "email"],
-  }).catch(errHandler);
-  res.json(users);
+  // const users = await User.findAll({
+  //   attributes: ["id", "name", "email"],
+  // }).catch(errHandler);
+  // res.json(users);
+
+  // Streams the large data
+  let Readable = stream.Readable;
+  let offsetIndex = 0;
+  const sql = "select * from users";
+
+  const recordsPerStream = 200000;
+  const recordCount = await User.count();
+  const numberOfStreams = Math.ceil(recordCount / recordsPerStream);
+
+  let resultStream = new Readable({
+    async read(size) {
+      const result = await sequelize.query(
+        sql +
+          ` LIMIT ${recordsPerStream} OFFSET ${offsetIndex * recordsPerStream}`,
+        { type: sequelize.QueryTypes.SELECT }
+      );
+      this.push(JSON.stringify(result));
+      offsetIndex++;
+      if (offsetIndex === numberOfStreams) {
+        this.push(null);
+      }
+    },
+  });
+
+  resultStream.pipe(res);
 });
 
 // Get single user
