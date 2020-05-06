@@ -1,0 +1,151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Node.js express-mysql API",
+    "description": "A boilerplate Node.js API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5002",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Systems",
+      "description": "API for Systems management"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "Bearer": {
+      "description": "For accessing the API a valid JWT token must be passed in all the queries in the 'Authorization' header. The following syntax must be used in the 'Authorization' header : Bearer xxxxxx.yyyyyyy.zzzzzz",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "paths": {
+    "/Systems": {
+      "post": {
+        "tags": ["Systems"],
+        "description": "Create new System",
+        "parameters": [
+          {
+            "name": "System",
+            "in": "body",
+            "description": "System that we want to create",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New System is created",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Systems"],
+        "summary": "Get all Systems in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Systems"
+            }
+          }
+        }
+      }
+    },
+    "/Systems/{SystemId}": {
+      "parameters": [
+        {
+          "name": "SystemId",
+          "in": "path",
+          "required": true,
+          "description": "ID of System that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Systems"],
+        "summary": "Get System with given ID",
+        "responses": {
+          "200": {
+            "description": "System is found",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete System with given ID",
+        "tags": ["Systems"],
+        "responses": {
+          "200": {
+            "description": "System is deleted",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update System with give ID",
+        "tags": ["Systems"],
+        "parameters": [
+          {
+            "name": "System",
+            "in": "body",
+            "description": "System with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "System is updated",
+            "schema": {
+              "$ref": "#/definitions/System"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "System": {
+      "required": ["sysname", "ip"],
+      "properties": {
+        "id": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "sysname": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "ip": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

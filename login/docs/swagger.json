@@ -1,0 +1,72 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Node.js express-mysql API",
+    "description": "A boilerplate Node.js API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5001",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Login",
+      "description": "API for admin login"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Admins"],
+        "description": "Create a access code for admin",
+        "parameters": [
+          {
+            "name": "admin",
+            "in": "body",
+            "description": "login credentials for admin",
+            "schema": {
+              "$ref": "#/definitions/Admin"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "JWT Access Token is created",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Admin": {
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "Token": {
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
