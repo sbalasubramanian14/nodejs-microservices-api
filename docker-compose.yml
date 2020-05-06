@@ -10,7 +10,7 @@ services:
     environment:
       - DATABASE_HOST=db
       - DATABASE_NAME=mydatabase
-      - DATABASE_USERNAME=admin
+      - DATABASE_USERNAME=root
       - DATABASE_PASSWORD=admin@123
 
   systems:
@@ -23,7 +23,7 @@ services:
     environment:
       - DATABASE_HOST=db
       - DATABASE_NAME=mydatabase
-      - DATABASE_USERNAME=admin
+      - DATABASE_USERNAME=root
       - DATABASE_PASSWORD=admin@123
 
   users:
@@ -36,19 +36,13 @@ services:
     environment:
       - DATABASE_HOST=db
       - DATABASE_NAME=mydatabase
-      - DATABASE_USERNAME=admin
+      - DATABASE_USERNAME=root
       - DATABASE_PASSWORD=admin@123
 
   db:
     build: "./database"
     ports:
       - "3306:3306"
-    environment:
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_ROOT_PASSWORD=admin@123
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=admin@123
-      - DATABASE_HOST=db
 
   nginx:
     image: nginx:latest
