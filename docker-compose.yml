@@ -27,7 +27,7 @@ services:
       - DATABASE_PASSWORD=admin@123
 
   users:
-    build: "./videos"
+    build: "./users"
     ports:
       - "5000:5000"
     depends_on:
