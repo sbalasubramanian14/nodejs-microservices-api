@@ -1,12 +1,19 @@
 const Sequelize = require("sequelize");
 
-module.exports = sequelize.define("System", {
-  id: {
-    type: Sequelize.INTEGER(100),
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
+module.exports = sequelize.define(
+  "System",
+  {
+    id: {
+      type: Sequelize.INTEGER(100),
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    sysname: Sequelize.STRING(100),
+    ip: Sequelize.STRING(200),
   },
-  sysname: Sequelize.STRING(100),
-  ip: Sequelize.STRING(200),
-});
+  {
+    freezeTableName: true,
+    tableName: "systems",
+  }
+);
