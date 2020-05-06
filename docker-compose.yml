@@ -1,0 +1,63 @@
+version: "3"
+services:
+  login:
+    build: "./login"
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - DATABASE_NAME=mydatabase
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=admin@123
+
+  systems:
+    build: "./systems"
+    ports:
+      - "5002:5002"
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - DATABASE_NAME=mydatabase
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=admin@123
+
+  users:
+    build: "./videos"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - DATABASE_NAME=mydatabase
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=admin@123
+
+  db:
+    image: "./mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE: stormlight
+      - MYSQL_ROOT_PASSWORD: supersecret
+      - MYSQL_USER: mysql
+      - MYSQL_PASSWORD: supersecret
+      - DATABASE_HOST: db
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      #     - ./web/public:/srv/www/static --> use this if you any any static web apps
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - login
+      - systems
+      - users
