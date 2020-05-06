@@ -10,7 +10,7 @@ services:
     environment:
       - DATABASE_HOST=db
       - DATABASE_NAME=mydatabase
-      - DATABASE_USERNAME=root
+      - DATABASE_USERNAME=admin
       - DATABASE_PASSWORD=admin@123
 
   systems:
@@ -23,7 +23,7 @@ services:
     environment:
       - DATABASE_HOST=db
       - DATABASE_NAME=mydatabase
-      - DATABASE_USERNAME=root
+      - DATABASE_USERNAME=admin
       - DATABASE_PASSWORD=admin@123
 
   users:
@@ -36,7 +36,7 @@ services:
     environment:
       - DATABASE_HOST=db
       - DATABASE_NAME=mydatabase
-      - DATABASE_USERNAME=root
+      - DATABASE_USERNAME=admin
       - DATABASE_PASSWORD=admin@123
 
   db:
@@ -46,7 +46,7 @@ services:
     environment:
       - MYSQL_DATABASE=mydatabase
       - MYSQL_ROOT_PASSWORD=admin@123
-      - MYSQL_USER=root
+      - MYSQL_USER=admin
       - MYSQL_PASSWORD=admin@123
       - DATABASE_HOST=db
 
