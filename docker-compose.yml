@@ -40,7 +40,7 @@ services:
       - DATABASE_PASSWORD=admin@123
 
   db:
-    image: "./db"
+    build: "./database"
     ports:
       - "3306:3306"
     environment:
