@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: systems-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: systems
+  template:
+    metadata:
+      labels:
+        component: systems
+    spec:
+      containers:
+        - name: systems
+          image: sbalasubramanian14/systems-api
+          ports:
+            - containerPort: 5002
+          env:
+            - name: DATABASE_HOST
+              value: mysql-cluster-ip-service
+            - name: DATABASE_NAME
+              value: mydatabase
+            - name: DATABASE_USERNAME
+              value: root
+            - name: DATABASE_PASSWORD
+              value: admin@123

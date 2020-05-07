@@ -13,3 +13,15 @@ spec:
             backend:
               serviceName: login-cluster-ip-service
               servicePort: 5001
+          - path: /api/v1/users
+            backend:
+              serviceName: users-cluster-ip-service
+              servicePort: 5000
+          - path: /api/v2/users
+            backend:
+              serviceName: users-cluster-ip-service
+              servicePort: 5000
+          - path: /api/v2/systems
+            backend:
+              serviceName: systems-cluster-ip-service
+              servicePort: 5002
