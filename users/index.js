@@ -7,7 +7,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./docs/swagger.json");
-
+const swaggerDocument2 = require("./docs/swaggerV2.json");
 const app = express();
 
 // Init middleware
@@ -19,7 +19,8 @@ app.use(cookieParser());
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs/v1", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs/v2", swaggerUi.serve, swaggerUi.setup(swaggerDocument2));
 app.use(authenticateJWT);
 // DB Connection
 require("./src/database/connection");
