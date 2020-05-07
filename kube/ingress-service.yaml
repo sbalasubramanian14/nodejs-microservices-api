@@ -21,7 +21,7 @@ spec:
             backend:
               serviceName: users-cluster-ip-service
               servicePort: 5000
-          - path: /api/v2/systems
+          - path: /api/v1/systems
             backend:
               serviceName: systems-cluster-ip-service
               servicePort: 5002
