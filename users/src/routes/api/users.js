@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { errHandler } = require("../../helpers");
-const User = require("./../../models/User");
+const User =
+  process.env.NODE_ENV !== "test"
+    ? require("./../../models/User")
+    : require("./../../models/User.stub");
 const stream = require("stream");
 
 // Get all users

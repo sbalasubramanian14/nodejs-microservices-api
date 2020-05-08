@@ -55,7 +55,7 @@ describe("/PUT/:id user", () => {
       name: "new name",
       email: "newEmail@gmail.com",
     };
-    const userId = 200000000;
+    const userId = 1;
 
     chai
       .request(app)
@@ -63,7 +63,7 @@ describe("/PUT/:id user", () => {
       .set("Authorization", `Bearer ${JWTToken}`)
       .send(user)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(200);
         res.body.should.be.a("object");
         res.body.should.have.property("msg");
         done();

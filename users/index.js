@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api-docs/v1", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api-docs/v2", swaggerUi.serve, swaggerUi.setup(swaggerDocument2));
 app.use(authenticateJWT);
+
 // DB Connection
 require("./src/database/connection");
 

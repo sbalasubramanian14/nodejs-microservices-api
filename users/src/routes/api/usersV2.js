@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { errHandler, paginate } = require("../../helpers");
-const User = require("./../../models/User");
+const User =
+  process.env.NODE_ENV != "test"
+    ? require("./../../models/User")
+    : require("./../../models/User.stub");
 
 // Get all users with pagination
 router.get("/", async (req, res) => {
