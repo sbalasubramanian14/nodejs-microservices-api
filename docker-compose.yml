@@ -55,3 +55,9 @@ services:
       - login
       - systems
       - users
+
+  dotnet:
+    build: "./todo"
+    ports:
+      - "5003:5003"
+      - "5003:80"
