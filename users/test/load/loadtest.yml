@@ -1,0 +1,22 @@
+config:
+  target: "http://localhost:5000"
+  phases:
+    - duration: 60
+      arrivalRate: 20
+  defaults:
+    headers:
+      Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTU4OTExOTMyMywiZXhwIjoxNTg5MTIxMTIzfQ.YO7xVMW-X2oSJvzLWjdKdUgxrNXxRpiooely05P-xUY"
+scenarios:
+  - flow:
+      - get:
+          url: "/api/v2/users"
+          qs:
+            page: 1
+            pageSize: 1000
+      - post:
+          url: "/api/v1/users"
+          json:
+            name: "newUser"
+            email: "newUser@gmail.com"
+      - get:
+          url: "/api/v1/users/1"

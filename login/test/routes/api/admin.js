@@ -1,7 +1,6 @@
 process.env.NODE_ENV = "test";
 
 const app = require("../../../index");
-const Admin = require("./../../../src/models/Admin");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
@@ -21,9 +20,9 @@ describe("/POST login", () => {
       .post("/api/v1/login")
       .send(admin)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(200);
         res.body.should.be.a("object");
-        res.body.should.have.property("msg");
+        res.body.should.have.property("accessToken");
         done();
       });
   });

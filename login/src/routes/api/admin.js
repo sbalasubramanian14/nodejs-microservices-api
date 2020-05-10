@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { errHandler } = require("../../helpers");
-const Admin = require("./../../models/Admin");
+const Admin =
+  process.env.NODE_ENV !== "test"
+    ? require("./../../models/Admin")
+    : require("./../../models/Admin.stub");
 const jwt = require("jsonwebtoken");
 
 if (process.env.NODE_ENV !== "production") {
