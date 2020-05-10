@@ -39,6 +39,11 @@ services:
       - DATABASE_USERNAME=root
       - DATABASE_PASSWORD=admin@123
 
+  todo:
+    build: "./todo"
+    ports:
+      - "5003:80"
+
   db:
     build: "./database"
     ports:
@@ -55,3 +60,4 @@ services:
       - login
       - systems
       - users
+      - todo

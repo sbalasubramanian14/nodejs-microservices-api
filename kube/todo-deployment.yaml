@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: todo
+  template:
+    metadata:
+      labels:
+        component: todo
+    spec:
+      containers:
+        - name: todo
+          image: sbalasubramanian14/api-todo
+          ports:
+            - containerPort: 80
