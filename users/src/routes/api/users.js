@@ -6,9 +6,10 @@ const User =
     ? require("./../../models/User")
     : require("./../../models/User.stub");
 const stream = require("stream");
+const compression = require("compression");
 
 // Get all users
-router.get("/", async (req, res) => {
+router.get("/", compression(), async (req, res) => {
   // const users = await User.findAll({
   //   attributes: ["id", "name", "email"],
   // }).catch(errHandler);
@@ -47,6 +48,7 @@ router.get("/:id", async (req, res) => {
     where: {
       id: req.params.id,
     },
+    raw: true,
   }).catch(errHandler);
 
   if (user && user.length > 0) {
