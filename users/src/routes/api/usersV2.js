@@ -17,6 +17,7 @@ router.get("/", compression(), async (req, res) => {
     ...paginate({ page, pageSize }),
   }).catch(errHandler);
 
+  res.json(users);
 });
 
 module.exports = router;

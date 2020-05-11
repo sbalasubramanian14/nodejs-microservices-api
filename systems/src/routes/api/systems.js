@@ -1,11 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { errHandler } = require("../../helpers");
+const { errHandler, paginate } = require("../../helpers");
 const System = require("../../models/System");
+const compression = require("compression");
 
 // Get all systems
-router.get("/", async (req, res) => {
-  const systems = await System.findAll().catch(errHandler);
+router.get("/", compression(), async (req, res) => {
+  const page = parseInt(req.query.page);
+  const pageSize = parseInt(req.query.pageSize);
+
+  const systems = await System.findAll({
+    ...paginate({ page, pageSize }),
+  }).catch(errHandler);
+
   res.json(systems);
 });
 
